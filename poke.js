@@ -1,47 +1,130 @@
+const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
+const sectionReiniciar = document.getElementById('reiniciar')
+const botonMascotaJugador = document.getElementById('boton-mascota')
+const botonFuego = document.getElementById('boton-fuego')
+const botonAgua = document.getElementById('boton-agua')
+const botonTierra = document.getElementById('boton-tierra')
+const botonReiniciar = document.getElementById('boton-reiniciar')
+
+const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
+
+
+const spanMascotaJugador = document.getElementById('mascota-jugador')
+
+const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+
+const spanVidasJugador = document.getElementById('vidas-jugador')
+const spanVidasEnemigo = document.getElementById('vidas-enemigo')
+
+const sectionMensajes = document.getElementById('resultado')
+const ataquesDelJugador = document.getElementById('ataques-del-jugador')
+
+const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
+
+const contenedorTarjetas = document.getElementById('contenedorTarjetas') // es el que va contener la informacion de las tarjetas que estaban en el html 
+
+
+let pokemones = []  //arreglo
 let ataqueJugador
 let ataqueEnemigo
+let opcionDePokemones
+let inputFlareon 
+let inputLapras 
+let inputHaunter 
 let vidasJugador = 3
 let vidasEnemigo = 3
 
+//objeto instancia se contruye con una clase y un cosntructor y vienven desde la clase
+
+class Pokemon { // la clase es el esquema para cada objeto
+    constructor(nombre, foto, vida) { //constuctor lo que va a contener el objeto sepuede añadir mas cosas
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+        this.ataques = []
+    }
+}
+
+let flareon = new Pokemon('Flareon', './img/flareon.png', 3) //objeto 
+let lapras = new Pokemon('Lapras', './img/lapras.png', 3)
+let haunter = new Pokemon('Haunter', './img/haunter.png', 3)
+
+//pokemones.push(flareon, lapras, haunter)   push inyecta informacion al arreglo
+
+
+//objetos literarios se construyen desde cero sin ningun tipo de clase y solo guardan informacion 
+
+flareon.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra'},
+)
+
+lapras.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra'},
+)
+
+haunter.ataques.push(
+    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    
+)
+
+pokemones.push(flareon,lapras,haunter);
+
 function iniciarJuego() {
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
+
     sectionSeleccionarAtaque.style.display = 'none'
 
-    let sectionReiniciar = document.getElementById('reiniciar')
-    sectionReiniciar.style.display = 'none'
+    pokemones.forEach((pokemon) => {   
+        opcionDePokemones = `
+        <input type="radio" name="mascota" id=${pokemon.nombre} />
+        <label class="tarjeta-de-mokepon" for=${pokemon.nombre}>
+            <p>${pokemon.nombre}</p>
+            <img src=${pokemon.foto} alt=${pokemon.nombre}>
+        </label>
+        `
+        contenedorTarjetas.innerHTML += opcionDePokemones // es el encargado de qeu se impriman las tarjetas que estan
     
-    let botonMascotaJugador = document.getElementById('boton-mascota')
+         inputFlareon = document.getElementById('Flareon')
+         inputLapras = document.getElementById('Lapras')
+         inputHaunter = document.getElementById('Haunter')
+    
+    });
+
+
+    sectionReiniciar.style.display = 'none'
+
+
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
-    let botonFuego = document.getElementById('boton-fuego')
-    botonFuego.addEventListener('click', ataqueFuego)
-    let botonAgua = document.getElementById('boton-agua')
-    botonAgua.addEventListener('click', ataqueAgua)
-    let botonTierra = document.getElementById('boton-tierra')
-    botonTierra.addEventListener('click', ataqueTierra)
 
-    let botonReiniciar = document.getElementById('boton-reiniciar')
+    botonFuego.addEventListener('click', ataqueFuego)
+    botonAgua.addEventListener('click', ataqueAgua)
+    botonTierra.addEventListener('click', ataqueTierra)
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 function seleccionarMascotaJugador() {
-    let sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
+
     sectionSeleccionarMascota.style.display = 'none'
-    
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
     sectionSeleccionarAtaque.style.display = 'flex'
-    
-    let inputFlareon = document.getElementById('Flareon')
-    let inputLapras = document.getElementById('Lapras')
-    let inputHaunter = document.getElementById('Haunter')
-    let spanMascotaJugador = document.getElementById('mascota-jugador')
-    
+
     if (inputFlareon.checked) {
-        spanMascotaJugador.innerHTML = 'Flareon'
+        spanMascotaJugador.innerHTML = inputFlareon.id
     } else if (inputLapras.checked) {
-        spanMascotaJugador.innerHTML = 'Lapras'
+        spanMascotaJugador.innerHTML = inputLapras.id
     } else if (inputHaunter.checked) {
-        spanMascotaJugador.innerHTML = 'Haunter'
+        spanMascotaJugador.innerHTML = inputHaunter.id
     } else {
         alert('Selecciona una mascota')
     }
@@ -50,8 +133,8 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarMascotaEnemigo() {
-    let mascotaAleatoria = aleatorio(1,3)
-    let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+    let mascotaAleatoria = aleatorio(1, 3)
+
 
     if (mascotaAleatoria == 1) {
         spanMascotaEnemigo.innerHTML = 'Flareon'
@@ -76,8 +159,8 @@ function ataqueTierra() {
 }
 
 function ataqueAleatorioEnemigo() {
-    let ataqueAleatorio = aleatorio(1,3)
-    
+    let ataqueAleatorio = aleatorio(1, 3)
+
     if (ataqueAleatorio == 1) {
         ataqueEnemigo = 'FUEGO'
     } else if (ataqueAleatorio == 2) {
@@ -90,20 +173,18 @@ function ataqueAleatorioEnemigo() {
 }
 
 function combate() {
-    let spanVidasJugador = document.getElementById('vidas-jugador')
-    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
-    
-    if(ataqueEnemigo == ataqueJugador) {
+
+    if (ataqueEnemigo == ataqueJugador) {
         crearMensaje("EMPATE")
-    } else if(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA') {
+    } else if (ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA') {
         crearMensaje("GANASTE")
         vidasEnemigo--
         spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO') {
+    } else if (ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO') {
         crearMensaje("GANASTE")
         vidasEnemigo--
         spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else if(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA') {
+    } else if (ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA') {
         crearMensaje("GANASTE")
         vidasEnemigo--
         spanVidasEnemigo.innerHTML = vidasEnemigo
@@ -125,10 +206,7 @@ function revisarVidas() {
 }
 //añadiendo mensaje
 function crearMensaje(resultado) {
-    let sectionMensajes = document.getElementById('resultado')
-    let ataquesDelJugador = document.getElementById('ataques-del-jugador')
-    let ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
-    
+
     let nuevoAtaqueDelJugador = document.createElement('p') // se usan parrafos para que no se repita el texto
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
@@ -141,18 +219,14 @@ function crearMensaje(resultado) {
 }
 
 function crearMensajeFinal(resultadoFinal) {
-    let sectionMensajes = document.getElementById('resultado')
-    
+
     sectionMensajes.innerHTML = resultadoFinal
 
-    let botonFuego = document.getElementById('boton-fuego')
     botonFuego.disabled = true
-    let botonAgua = document.getElementById('boton-agua')
     botonAgua.disabled = true
-    let botonTierra = document.getElementById('boton-tierra')
     botonTierra.disabled = true
 
-    let sectionReiniciar = document.getElementById('reiniciar')
+
     sectionReiniciar.style.display = 'block'
 }
 

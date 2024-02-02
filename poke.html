@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Pokemon</title>
-        <script src="poke.js"></script>
+        
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
@@ -12,31 +12,15 @@
 
             <h2 class="subtitulo">Elige tu mascota:</h2>
 
-            <div class="tarjetas">
-                <input type="radio" name="mascota" id="Flareon" />
-                <label class="tarjeta-de-mokepon" for="Flareon">
-                    <p>Flareon</p>
-                    <img src="./img/flareon.png" alt="Flareon">
-                </label>
-                
-                <input type="radio" name="mascota" id="Lapras" />
-                <label class="tarjeta-de-mokepon" for="Lapras">
-                    <p>Lapras</p>
-                    <img src="./img/lapras.png" alt="Lapras">
-                </label>
+            <div id="contenedorTarjetas" class="tarjetas">
 
-                <input type="radio" name="mascota" id="Haunter" />
-                <label class="tarjeta-de-mokepon" for="Haunter">
-                    <p>Haunter</p>
-                    <img src="./img/Haunter.png" alt="Haunter">
-                </label>
             </div>
 
             <button id="boton-mascota">Seleccionar</button>
         </section>
 
         <section id="seleccionar-ataque">
-            <h1 class="titulo">Mokepon</h1>
+            <h1 class="titulo">Pokemon</h1>
 
             <h2 class="subtitulo">Elige tu ataque:</h2>
 
@@ -68,4 +52,6 @@
             </div>
         </section>
     </body>
+
+    <script src="poke.js"></script>
 </html>
