@@ -141,7 +141,7 @@ function extraerAtaques(mascotaJugador) { // el parametro se usa como variable i
         if (mascotaJugador===pokemones[i].nombre) { // me  trae la informacion del nombre
             ataques = pokemones[i].ataques // para que atraiga los ataques del pokemon 
     }
-    console.log(ataques)
+    mostrarAtaques(ataques) // funcion para mostrar ataques
 }
 }
 
