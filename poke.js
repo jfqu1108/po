@@ -120,7 +120,7 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarAtaque.style.display = 'flex'
 
     if (inputFlareon.checked) {
-        spanMascotaJugador.innerHTML = inputFlareon.id
+        spanMascotaJugador.innerHTML = inputFlareon.id // sirve para traer la informacion del objeto
     } else if (inputLapras.checked) {
         spanMascotaJugador.innerHTML = inputLapras.id
     } else if (inputHaunter.checked) {
