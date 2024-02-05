@@ -1,10 +1,8 @@
 const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
-const botonFuego = document.getElementById('boton-fuego')
-const botonAgua = document.getElementById('boton-agua')
-const botonTierra = document.getElementById('boton-tierra')
-const botonReiniciar = document.getElementById('boton-reiniciar')
+
+const contenedorAtaques = document.getElementById('contenedorAtaques')
 
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
 
@@ -32,6 +30,11 @@ let inputFlareon
 let inputLapras
 let inputHaunter
 let mascotaJugador
+let ataquesPokemon
+let botonFuego 
+let botonAgua 
+let botonTierra 
+let botonReiniciar 
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -106,10 +109,7 @@ function iniciarJuego() {
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
-    botonFuego.addEventListener('click', ataqueFuego)
-    botonAgua.addEventListener('click', ataqueAgua)
-    botonTierra.addEventListener('click', ataqueTierra)
-    botonReiniciar.addEventListener('click', reiniciarJuego)
+
 }
 
 function seleccionarMascotaJugador() {
@@ -141,10 +141,28 @@ function extraerAtaques(mascotaJugador) { // el parametro se usa como variable i
         if (mascotaJugador===pokemones[i].nombre) { // me  trae la informacion del nombre
             ataques = pokemones[i].ataques // para que atraiga los ataques del pokemon 
     }
+    }
     mostrarAtaques(ataques) // funcion para mostrar ataques
 }
-}
 
+function mostrarAtaques(ataques) {
+    ataques.forEach((ataque) => { //por cada ataque que exita en el arreglo de ataques  dentro de ataques hace
+        ataquesPokemon = `
+        <button id= ${ataque.id} class="boton-de-ataque">${ataque.nombre}</button>
+        `
+        contenedorAtaques.innerHTML += ataquesPokemon
+})
+botonFuego = document.getElementById('boton-fuego')
+botonAgua = document.getElementById('boton-agua')
+botonTierra = document.getElementById('boton-tierra')
+botonReiniciar = document.getElementById('boton-reiniciar')
+
+
+botonFuego.addEventListener('click', ataqueFuego)
+botonAgua.addEventListener('click', ataqueAgua)
+botonTierra.addEventListener('click', ataqueTierra)
+botonReiniciar.addEventListener('click', reiniciarJuego)
+}
 
 function seleccionarMascotaEnemigo() {
     let mascotaAleatoria = aleatorio(0, pokemones.length - 1);// para que cada vez que agregue un pokemon en el arreglo, este se adiciones de una a la seleccion el menos uno es para que me de el arreglo real
