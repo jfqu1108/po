@@ -31,6 +31,7 @@ let opcionDePokemones
 let inputFlareon
 let inputLapras
 let inputHaunter
+let mascotaJugador
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -117,17 +118,33 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarAtaque.style.display = 'flex'
 
     if (inputFlareon.checked) {
-        spanMascotaJugador.innerHTML = inputFlareon.id // sirve para traer la informacion del objeto
+        spanMascotaJugador.innerHTML = inputFlareon.id // sirve para impirmir en HTML
+        mascotaJugador = inputFlareon.id // almacen el nombre del personaje para usar en otra funcion
     } else if (inputLapras.checked) {
         spanMascotaJugador.innerHTML = inputLapras.id
+        mascotaJugador = inputLapras.id
     } else if (inputHaunter.checked) {
         spanMascotaJugador.innerHTML = inputHaunter.id
+        mascotaJugador = inputHaunter.id
     } else {
         alert('Selecciona una mascota')
     }
 
+    extraerAtaques(mascotaJugador) //funcion con parametro
+
     seleccionarMascotaEnemigo()
 }
+
+function extraerAtaques(mascotaJugador) { // el parametro se usa como variable interna
+    let ataques
+    for (let i = 0; i <pokemones.length; i++) {
+        if (mascotaJugador===pokemones[i].nombre) { // me  trae la informacion del nombre
+            ataques = pokemones[i].ataques // para que atraiga los ataques del pokemon 
+    }
+    console.log(ataques)
+}
+}
+
 
 function seleccionarMascotaEnemigo() {
     let mascotaAleatoria = aleatorio(0, pokemones.length - 1);// para que cada vez que agregue un pokemon en el arreglo, este se adiciones de una a la seleccion el menos uno es para que me de el arreglo real
