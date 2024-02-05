@@ -28,9 +28,9 @@ let pokemones = []  //arreglo
 let ataqueJugador
 let ataqueEnemigo
 let opcionDePokemones
-let inputFlareon 
-let inputLapras 
-let inputHaunter 
+let inputFlareon
+let inputLapras
+let inputHaunter
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -59,7 +59,7 @@ flareon.ataques.push(
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '🌱', id: 'boton-tierra' },
 )
 
 lapras.ataques.push(
@@ -67,25 +67,25 @@ lapras.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '🌱', id: 'boton-tierra' },
 )
 
 haunter.ataques.push(
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🔥', id: 'boton-fuego' },
-    
+
 )
 
-pokemones.push(flareon,lapras,haunter);
+pokemones.push(flareon, lapras, haunter);
 
 function iniciarJuego() {
 
     sectionSeleccionarAtaque.style.display = 'none'
 
-    pokemones.forEach((pokemon) => {   
+    pokemones.forEach((pokemon) => {
         opcionDePokemones = `
         <input type="radio" name="mascota" id=${pokemon.nombre} />
         <label class="tarjeta-de-mokepon" for=${pokemon.nombre}>
@@ -94,19 +94,16 @@ function iniciarJuego() {
         </label>
         `
         contenedorTarjetas.innerHTML += opcionDePokemones // es el encargado de qeu se impriman las tarjetas que estan
-    
-         inputFlareon = document.getElementById('Flareon')
-         inputLapras = document.getElementById('Lapras')
-         inputHaunter = document.getElementById('Haunter')
-    
-    });
 
+        inputFlareon = document.getElementById('Flareon')
+        inputLapras = document.getElementById('Lapras')
+        inputHaunter = document.getElementById('Haunter')
+
+    });
 
     sectionReiniciar.style.display = 'none'
 
-
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
-
 
     botonFuego.addEventListener('click', ataqueFuego)
     botonAgua.addEventListener('click', ataqueAgua)
@@ -133,16 +130,9 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarMascotaEnemigo() {
-    let mascotaAleatoria = aleatorio(1, 3)
+    let mascotaAleatoria = aleatorio(0, pokemones.length - 1);// para que cada vez que agregue un pokemon en el arreglo, este se adiciones de una a la seleccion el menos uno es para que me de el arreglo real
 
-
-    if (mascotaAleatoria == 1) {
-        spanMascotaEnemigo.innerHTML = 'Flareon'
-    } else if (mascotaAleatoria == 2) {
-        spanMascotaEnemigo.innerHTML = 'Lapras'
-    } else {
-        spanMascotaEnemigo.innerHTML = 'Haunter'
-    }
+        spanMascotaEnemigo.innerHTML = pokemones[mascotaAleatoria].nombre// permite la seleccion aleatoria mediante el arreglo
 }
 
 function ataqueFuego() {
@@ -225,7 +215,6 @@ function crearMensajeFinal(resultadoFinal) {
     botonFuego.disabled = true
     botonAgua.disabled = true
     botonTierra.disabled = true
-
 
     sectionReiniciar.style.display = 'block'
 }
