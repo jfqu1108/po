@@ -26,13 +26,14 @@ const contenedorTarjetas = document.getElementById('contenedorTarjetas') // es e
 
 let pokemones = []  //arreglo
 let ataqueJugador = []
-let ataqueEnemigo
+let ataqueEnemigo = []
 let opcionDePokemones
 let inputFlareon
 let inputLapras
 let inputHaunter
 let mascotaJugador
 let ataquesPokemon
+let ataquesPokemonEnemigo
 let botonFuego
 let botonAgua
 let botonTierra
@@ -158,7 +159,7 @@ function mostrarAtaques(ataques) {
     botones = document.querySelectorAll('.BAtaque')// sirve para que seleccione todos los elementos que tengan algo en una misma clase
 
 }
-
+// creando la secuencia de ataques
 function secuenciaAtaque() {
     botones.forEach((boton) => {
         boton.addEventListener('click', (e) => {
@@ -175,30 +176,29 @@ function secuenciaAtaque() {
                 console.log('ataqueJugador')
                 boton.style.backgroundColor = '#112f58'
             }
+            ataqueAleatorioEnemigo() // va aqui para que cuando el jugador ataque, la maquina ataque de una vez
         })
 
     })
 }
 
-
 function seleccionarMascotaEnemigo() {
     let mascotaAleatoria = aleatorio(0, pokemones.length - 1);// para que cada vez que agregue un pokemon en el arreglo, este se adiciones de una a la seleccion el menos uno es para que me de el arreglo real
 
     spanMascotaEnemigo.innerHTML = pokemones[mascotaAleatoria].nombre// permite la seleccion aleatoria mediante el arreglo
+    ataquesPokemonEnemigo = pokemones[mascotaAleatoria].ataques// selecciona el ataque del arreglo
     secuenciaAtaque()
 }
 
-
-
 function ataqueAleatorioEnemigo() {
-    let ataqueAleatorio = aleatorio(1, 3)
+    let ataqueAleatorio = aleatorio(0, ataqueAleatorioEnemigo.length - 1) // aument a medida que aumenten los ataques
 
-    if (ataqueAleatorio == 1) {
-        ataqueEnemigo = 'FUEGO'
-    } else if (ataqueAleatorio == 2) {
-        ataqueEnemigo = 'AGUA'
+    if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
+        ataqueEnemigo.push('FUEGO') // si sale el ataque uno agregalos al arreglo
+    } else if (ataqueAleatorio == 2 || ataqueAleatorio == 3) {
+        ataqueEnemigo.push('AGUA')
     } else {
-        ataqueEnemigo = 'TIERRA'
+        ataqueEnemigo.push('TIERRA')
     }
 
     combate()
