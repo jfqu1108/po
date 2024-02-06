@@ -202,8 +202,16 @@ function ataqueAleatorioEnemigo() {
         ataqueEnemigo.push('TIERRA')
     }
     console.log(ataqueEnemigo)
+    iniciarPelea()
+}
+//secuencia de 5 ataques para definir el ganador
 
-    combate()
+function iniciarPelea() {
+    //inicio de validacion
+    if (ataqueJugador.length === 5){
+        combate();
+    }
+
 }
 
 function combate() {
