@@ -176,6 +176,7 @@ function secuenciaAtaque() {
                 console.log('ataqueJugador')
                 boton.style.backgroundColor = '#112f58'
             }
+            console.log(ataqueJugador)
             ataqueAleatorioEnemigo() // va aqui para que cuando el jugador ataque, la maquina ataque de una vez
         })
 
@@ -200,6 +201,7 @@ function ataqueAleatorioEnemigo() {
     } else {
         ataqueEnemigo.push('TIERRA')
     }
+    console.log(ataqueEnemigo)
 
     combate()
 }
