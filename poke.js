@@ -25,7 +25,7 @@ const contenedorTarjetas = document.getElementById('contenedorTarjetas') // es e
 
 
 let pokemones = []  //arreglo
-let ataqueJugador
+let ataqueJugador = []
 let ataqueEnemigo
 let opcionDePokemones
 let inputFlareon
@@ -33,9 +33,9 @@ let inputLapras
 let inputHaunter
 let mascotaJugador
 let ataquesPokemon
-let botonFuego 
-let botonAgua 
-let botonTierra 
+let botonFuego
+let botonAgua
+let botonTierra
 let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
@@ -137,10 +137,10 @@ function seleccionarMascotaJugador() {
 
 function extraerAtaques(mascotaJugador) { // el parametro se usa como variable interna
     let ataques
-    for (let i = 0; i <pokemones.length; i++) {
-        if (mascotaJugador===pokemones[i].nombre) { // me  trae la informacion del nombre
+    for (let i = 0; i < pokemones.length; i++) {
+        if (mascotaJugador === pokemones[i].nombre) { // me  trae la informacion del nombre
             ataques = pokemones[i].ataques // para que atraiga los ataques del pokemon 
-    }
+        }
     }
     mostrarAtaques(ataques) // funcion para mostrar ataques
 }
@@ -151,33 +151,32 @@ function mostrarAtaques(ataques) {
         <button id= ${ataque.id} class="boton-de-ataque BAtaque">${ataque.nombre}</button>
         `
         contenedorAtaques.innerHTML += ataquesPokemon
-})
-botonFuego = document.getElementById('boton-fuego')
-botonAgua = document.getElementById('boton-agua')
-botonTierra = document.getElementById('boton-tierra')
-botones = document.querySelectorAll('BAtaque')// sirve para que seleccione todos los elementos que tengan algo en una misma clase
+    })
+    botonFuego = document.getElementById('boton-fuego')
+    botonAgua = document.getElementById('boton-agua')
+    botonTierra = document.getElementById('boton-tierra')
+    botones = document.querySelectorAll('.BAtaque')// sirve para que seleccione todos los elementos que tengan algo en una misma clase
 
-
-botonFuego.addEventListener('click', ataqueFuego)
-botonAgua.addEventListener('click', ataqueAgua)
-botonTierra.addEventListener('click', ataqueTierra)
 }
 
-function secuenciaAtaque(){
-    botones.forEach((boton) =>{
-        if (e.target.textContent === '🔥'){
-            ataqueJugador.push('FUEGO')
-            console.log('ataqueJugador')
-            boton.style.backgroundColor = '#112f58'
-        }else if(e.target.textContent === '💧'){
-            ataqueJugador.push('AGUA')
-            console.log('ataqueJugador')
-            boton.style.backgroundColor = '#112f58'
-        }else{
-            ataqueJugador.push('TIERRA')
-            console.log('ataqueJugador')
-            boton.style.backgroundColor = '#112f58'
-        }
+function secuenciaAtaque() {
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            if (e.target.textContent === '🔥') {
+                ataqueJugador.push('FUEGO')
+                console.log('ataqueJugador')
+                boton.style.backgroundColor = '#112f58'
+            } else if (e.target.textContent === '💧') {
+                ataqueJugador.push('AGUA')
+                console.log('ataqueJugador')
+                boton.style.backgroundColor = '#112f58'
+            } else {
+                ataqueJugador.push('TIERRA')
+                console.log('ataqueJugador')
+                boton.style.backgroundColor = '#112f58'
+            }
+        })
+
     })
 }
 
@@ -185,21 +184,11 @@ function secuenciaAtaque(){
 function seleccionarMascotaEnemigo() {
     let mascotaAleatoria = aleatorio(0, pokemones.length - 1);// para que cada vez que agregue un pokemon en el arreglo, este se adiciones de una a la seleccion el menos uno es para que me de el arreglo real
 
-        spanMascotaEnemigo.innerHTML = pokemones[mascotaAleatoria].nombre// permite la seleccion aleatoria mediante el arreglo
+    spanMascotaEnemigo.innerHTML = pokemones[mascotaAleatoria].nombre// permite la seleccion aleatoria mediante el arreglo
+    secuenciaAtaque()
 }
 
-function ataqueFuego() {
-    ataqueJugador = 'FUEGO'
-    ataqueAleatorioEnemigo()
-}
-function ataqueAgua() {
-    ataqueJugador = 'AGUA'
-    ataqueAleatorioEnemigo()
-}
-function ataqueTierra() {
-    ataqueJugador = 'TIERRA'
-    ataqueAleatorioEnemigo()
-}
+
 
 function ataqueAleatorioEnemigo() {
     let ataqueAleatorio = aleatorio(1, 3)
