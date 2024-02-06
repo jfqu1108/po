@@ -1,6 +1,8 @@
 const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
+const botonReiniciar = document.getElementById('boton-reiniciar')
+sectionReiniciar.style.display = 'none'
 
 const contenedorAtaques = document.getElementById('contenedorAtaques')
 
@@ -34,7 +36,7 @@ let ataquesPokemon
 let botonFuego 
 let botonAgua 
 let botonTierra 
-let botonReiniciar 
+let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -105,11 +107,9 @@ function iniciarJuego() {
 
     });
 
-    sectionReiniciar.style.display = 'none'
-
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
-
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 function seleccionarMascotaJugador() {
@@ -148,21 +148,22 @@ function extraerAtaques(mascotaJugador) { // el parametro se usa como variable i
 function mostrarAtaques(ataques) {
     ataques.forEach((ataque) => { //por cada ataque que exita en el arreglo de ataques  dentro de ataques hace
         ataquesPokemon = `
-        <button id= ${ataque.id} class="boton-de-ataque">${ataque.nombre}</button>
+        <button id= ${ataque.id} class="boton-de-ataque BAtaque">${ataque.nombre}</button>
         `
         contenedorAtaques.innerHTML += ataquesPokemon
 })
 botonFuego = document.getElementById('boton-fuego')
 botonAgua = document.getElementById('boton-agua')
 botonTierra = document.getElementById('boton-tierra')
-botonReiniciar = document.getElementById('boton-reiniciar')
+botones = document.querySelectorAll('BAtaque')// sirve para que seleccione todos los elementos que tengan algo en una misma clase
 
 
 botonFuego.addEventListener('click', ataqueFuego)
 botonAgua.addEventListener('click', ataqueAgua)
 botonTierra.addEventListener('click', ataqueTierra)
-botonReiniciar.addEventListener('click', reiniciarJuego)
 }
+
+
 
 function seleccionarMascotaEnemigo() {
     let mascotaAleatoria = aleatorio(0, pokemones.length - 1);// para que cada vez que agregue un pokemon en el arreglo, este se adiciones de una a la seleccion el menos uno es para que me de el arreglo real
