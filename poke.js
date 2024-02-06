@@ -192,7 +192,7 @@ function seleccionarMascotaEnemigo() {
 }
 
 function ataqueAleatorioEnemigo() {
-    let ataqueAleatorio = aleatorio(0, ataqueAleatorioEnemigo.length - 1) // aument a medida que aumenten los ataques
+    let ataqueAleatorio = aleatorio(0, ataquesPokemonEnemigo.length - 1) // aument a medida que aumenten los ataques
 
     if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
         ataqueEnemigo.push('FUEGO') // si sale el ataque uno agregalos al arreglo
