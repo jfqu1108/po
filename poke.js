@@ -38,6 +38,8 @@ let botonFuego
 let botonAgua
 let botonTierra
 let botones = []
+let iAtaqueJugador
+let iAtaqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -208,34 +210,27 @@ function ataqueAleatorioEnemigo() {
 
 function iniciarPelea() {
     //inicio de validacion
-    if (ataqueJugador.length === 5){
+    if (ataqueJugador.length === 5) {
         combate();
     }
 
 }
 
+function iAmbosOponentes(jugador, enemigo) { //sirve para imprimir el ataque que se eligio
+iAtaqueJugador = ataqueJugador[jugador] //estas variables van a guardar el ataque del jugador
+iAtaqueEnemigo = ataqueEnemigo[enemigo]
+}
+
 function combate() {
 
-    if (ataqueEnemigo == ataqueJugador) {
-        crearMensaje("EMPATE")
-    } else if (ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA') {
-        crearMensaje("GANASTE")
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else if (ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO') {
-        crearMensaje("GANASTE")
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else if (ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA') {
-        crearMensaje("GANASTE")
-        vidasEnemigo--
-        spanVidasEnemigo.innerHTML = vidasEnemigo
-    } else {
-        crearMensaje("PERDISTE")
-        vidasJugador--
-        spanVidasJugador.innerHTML = vidasJugador
+    //un for para que recorarra el arreglo del jugador y de la maquina 
+    for (let i = 0; i < ataqueJugador.length; i++) {
+        iAmbosOponentes(i, i) //impime el ataque de cada jugador
+        crearMensaje("empate")
+
     }
 
+    
     revisarVidas()
 }
 
@@ -253,8 +248,8 @@ function crearMensaje(resultado) {
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
     sectionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+    nuevoAtaqueDelJugador.innerHTML = iAtaqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = iAtaqueEnemigo
 
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
