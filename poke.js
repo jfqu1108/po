@@ -77,11 +77,26 @@ class Pokemon { // la clase es el esquema para cada objeto
         this.velocidadX = 0
         this.velocidadY = 0
     }
+    pintarPokemon(){
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
+        
+    }
 }
 
-let flareon = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png') //objeto 
+let flareon = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png') // arreglo 
 let lapras = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png')
 let haunter = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png')
+
+//arreglo de enemigos 
+let flareonEnemigo = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png', 75, 95) // arreglo 
+let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png', 100, 45)
+let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png',30, 15)
 
 //pokemones.push(flareon, lapras, haunter)   push inyecta informacion al arreglo
 
@@ -338,6 +353,7 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+//pintar la mascota del jugador
 
 function pintarCanvas() {
     // pintar mascotas
@@ -351,13 +367,14 @@ function pintarCanvas() {
         0,
         mapa.width,
         mapa.height)
-    lienzo.drawImage(
-        mascotaJugadorObjeto.mapaFoto,
-        mascotaJugadorObjeto.x,
-        mascotaJugadorObjeto.y,
-        mascotaJugadorObjeto.ancho,
-        mascotaJugadorObjeto.alto
-    )
+
+// pintar mascota
+        mascotaJugadorObjeto.pintarPokemon()
+        //pintar la mascota del enemigo
+        flareonEnemigo.pintarPokemon()
+        laprasEnemigo.pintarPokemon()
+        haunterEnemigo.pintarPokemon()       
+
 
     //movimiento de los pokemones
 }
