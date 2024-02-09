@@ -52,6 +52,8 @@ let vidasEnemigo = 3
 
 let lienzo = mapa.getContext("2d") //canvas  permite dibujar dentro del lienzo
 let intervalo // para actualizar el canvas llamando una funcion constantemente por un tiempo estimado
+let mapaBackground = new Image()
+mapaBackground.src ='./img/mapa.png'
 
 
 //objeto instancia se contruye con una clase y un cosntructor y vienven desde la clase
@@ -143,7 +145,7 @@ function seleccionarMascotaJugador() {
 
     //canvas
     sectionVermapa.style.display = 'flex'
-    intervalo = setInterval(pintarPersonaje, 50)
+    intervalo = setInterval(pintarCanvas, 50)
 
     iniciarMapa()
 
@@ -329,11 +331,17 @@ function aleatorio(min, max) {
 
 
 
-function pintarPersonaje() {
+function pintarCanvas() {
     flareon.x = flareon.x + flareon.velocidadX; // si tiene velocidad en x se actualiza en x
     flareon.y = flareon.y + flareon.velocidadY;
 
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height)
     lienzo.drawImage(
         flareon.mapaFoto,
         flareon.x,
@@ -387,7 +395,14 @@ function teclaPresionada(event) {
 
 }
 
-function iniciarMapa() { 
+function iniciarMapa() {
+    // incrementar tamaño del mapa
+
+    mapa.width = 800
+    mapa.height = 600
+
+
+
     window.addEventListener('keydown', teclaPresionada)
     window.addEventListener('keyup', detenerMovimiento)
 }
