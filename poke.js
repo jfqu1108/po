@@ -56,13 +56,13 @@ let vidasEnemigo = 3
 let lienzo = mapa.getContext("2d") //canvas  permite dibujar dentro del lienzo
 let intervalo // para actualizar el canvas llamando una funcion constantemente por un tiempo estimado
 let mapaBackground = new Image()
-mapaBackground.src ='./img/mapa.png'
+mapaBackground.src = './img/mapa.png'
 
 
 //objeto instancia se contruye con una clase y un cosntructor y vienven desde la clase
 
 class Pokemon { // la clase es el esquema para cada objeto
-    constructor(nombre, foto, vida) { //constuctor lo que va a contener el objeto sepuede añadir mas cosas
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) { //constuctor lo que va a contener el objeto sepuede añadir mas cosas
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
@@ -73,15 +73,15 @@ class Pokemon { // la clase es el esquema para cada objeto
         this.ancho = 80
         this.alto = 80
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
         this.velocidadY = 0
     }
 }
 
-let flareon = new Pokemon('Flareon', './img/flareon.png', 3) //objeto 
-let lapras = new Pokemon('Lapras', './img/lapras.png', 3)
-let haunter = new Pokemon('Haunter', './img/haunter.png', 3)
+let flareon = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png') //objeto 
+let lapras = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png')
+let haunter = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png')
 
 //pokemones.push(flareon, lapras, haunter)   push inyecta informacion al arreglo
 
@@ -406,7 +406,7 @@ function teclaPresionada(event) {
 
 function iniciarMapa() {
 
-    mascotaJugadorObjeto =obtenerObjetoMascota();
+    mascotaJugadorObjeto = obtenerObjetoMascota();
     // incrementar tamaño del mapa
 
     mapa.width = 500
@@ -418,9 +418,9 @@ function iniciarMapa() {
     window.addEventListener('keyup', detenerMovimiento)
 }
 // funcion para pintar las mascotas
-function obtenerObjetoMascota(){
-    for (let i = 0; i <pokemones.length; i++){
-        if (mascotaJugador ===pokemones[i].nombre){
+function obtenerObjetoMascota() {
+    for (let i = 0; i < pokemones.length; i++) {
+        if (mascotaJugador === pokemones[i].nombre) {
             return pokemones[i]
         }
 
