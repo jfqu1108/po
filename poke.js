@@ -145,8 +145,7 @@ function seleccionarMascotaJugador() {
     sectionVermapa.style.display = 'flex'
     intervalo = setInterval(pintarPersonaje, 50)
 
-    window.addEventListener('keydown', teclaPresionada)
-    window.addEventListener('keyup', detenerMovimiento)
+    iniciarMapa()
 
     if (inputFlareon.checked) {
         spanMascotaJugador.innerHTML = inputFlareon.id // sirve para impirmir en HTML
@@ -386,5 +385,10 @@ function teclaPresionada(event) {
 
     }
 
+}
+
+function iniciarMapa() { 
+    window.addEventListener('keydown', teclaPresionada)
+    window.addEventListener('keyup', detenerMovimiento)
 }
 window.addEventListener('load', iniciarJuego)
