@@ -1,3 +1,5 @@
+//declaraciones
+
 const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
@@ -36,6 +38,7 @@ let inputFlareon
 let inputLapras
 let inputHaunter
 let mascotaJugador
+let mascotaJugadorObjeto
 let ataquesPokemon
 let ataquesPokemonEnemigo
 let botonFuego
@@ -145,7 +148,7 @@ function seleccionarMascotaJugador() {
 
     //canvas
     sectionVermapa.style.display = 'flex'
-    intervalo = setInterval(pintarCanvas, 50)
+    //intervalo = setInterval(pintarCanvas, 50)
 
     iniciarMapa()
 
@@ -163,6 +166,12 @@ function seleccionarMascotaJugador() {
     }
 
     extraerAtaques(mascotaJugador) //funcion con parametro
+
+    //iniciar recorrido del mapa
+    sectionVermapa.style.display = 'flex'
+    intervalo = setInterval(pintarCanvas, 50)
+
+    iniciarMapa()
 
     seleccionarMascotaEnemigo()
 }
@@ -330,10 +339,10 @@ function aleatorio(min, max) {
 }
 
 
-
 function pintarCanvas() {
-    flareon.x = flareon.x + flareon.velocidadX; // si tiene velocidad en x se actualiza en x
-    flareon.y = flareon.y + flareon.velocidadY;
+    // pintar mascotas
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX; // si tiene velocidad en x se actualiza en x
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY;
 
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
@@ -343,35 +352,35 @@ function pintarCanvas() {
         mapa.width,
         mapa.height)
     lienzo.drawImage(
-        flareon.mapaFoto,
-        flareon.x,
-        flareon.y,
-        flareon.ancho,
-        flareon.alto
+        mascotaJugadorObjeto.mapaFoto,
+        mascotaJugadorObjeto.x,
+        mascotaJugadorObjeto.y,
+        mascotaJugadorObjeto.ancho,
+        mascotaJugadorObjeto.alto
     )
 
     //movimiento de los pokemones
 }
 function moverArriba() {
-    flareon.velocidadY = -5
+    mascotaJugadorObjeto.velocidadY = -5
 }
 
 function moverIzquierda() {
-    flareon.velocidadX = -5
+    mascotaJugadorObjeto.velocidadX = -5
 }
 
 function moverAbajo() {
-    flareon.velocidadY = 5
+    mascotaJugadorObjeto.velocidadY = 5
 }
 
 function moverDerecha() {
-    flareon.velocidadX = 5
+    mascotaJugadorObjeto.velocidadX = 5
 }
 
 //funcion para detener el movimiento
 function detenerMovimiento() {
-    flareon.velocidadX = 0
-    flareon.velocidadY = 0
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
 }
 
 function teclaPresionada(event) {
@@ -396,14 +405,26 @@ function teclaPresionada(event) {
 }
 
 function iniciarMapa() {
+
+    mascotaJugadorObjeto =obtenerObjetoMascota();
     // incrementar tamaño del mapa
 
-    mapa.width = 800
-    mapa.height = 600
+    mapa.width = 500
+    mapa.height = 300
 
 
 
     window.addEventListener('keydown', teclaPresionada)
     window.addEventListener('keyup', detenerMovimiento)
 }
+// funcion para pintar las mascotas
+function obtenerObjetoMascota(){
+    for (let i = 0; i <pokemones.length; i++){
+        if (mascotaJugador ===pokemones[i].nombre){
+            return pokemones[i]
+        }
+
+    }
+}
+
 window.addEventListener('load', iniciarJuego)
