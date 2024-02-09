@@ -24,6 +24,10 @@ const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas') // es el que va contener la informacion de las tarjetas que estaban en el html 
 
 
+const sectionVermapa = document.getElementById('ver-mapa') //canvas
+const mapa = document.getElementById('mapa') // canvas
+
+
 let pokemones = []  //arreglo
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -38,10 +42,17 @@ let botonFuego
 let botonAgua
 let botonTierra
 let botones = []
-let iAtaqueJugador
-let iAtaqueEnemigo
+let victoriasJugador = 0
+let victoriasEnemigo = 0
+let indexAtaqueJugador
+let indexAtaqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
+
+
+let lienzo = mapa.getContext("2d") //canvas  permite dibujar dentro del lienzo
+let intervalo // para actualizar el canvas llamando una funcion constantemente por un tiempo estimado
+
 
 //objeto instancia se contruye con una clase y un cosntructor y vienven desde la clase
 
@@ -51,6 +62,15 @@ class Pokemon { // la clase es el esquema para cada objeto
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        //creacion de la imagen dentro del constructor
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 
@@ -93,6 +113,7 @@ pokemones.push(flareon, lapras, haunter);
 function iniciarJuego() {
 
     sectionSeleccionarAtaque.style.display = 'none'
+    sectionVermapa.style.display = 'none'
 
     pokemones.forEach((pokemon) => {
         opcionDePokemones = `
@@ -118,7 +139,14 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
 
     sectionSeleccionarMascota.style.display = 'none'
-    sectionSeleccionarAtaque.style.display = 'flex'
+    //sectionSeleccionarAtaque.style.display = 'flex'
+
+    //canvas
+    sectionVermapa.style.display = 'flex'
+    intervalo = setInterval(pintarPersonaje, 50)
+
+    window.addEventListener('keydown', teclaPresionada)
+    window.addEventListener('keyup', detenerMovimiento)
 
     if (inputFlareon.checked) {
         spanMascotaJugador.innerHTML = inputFlareon.id // sirve para impirmir en HTML
@@ -169,14 +197,17 @@ function secuenciaAtaque() {
                 ataqueJugador.push('FUEGO')
                 console.log('ataqueJugador')
                 boton.style.backgroundColor = '#112f58'
+                boton.disabled = true
             } else if (e.target.textContent === '💧') {
                 ataqueJugador.push('AGUA')
                 console.log('ataqueJugador')
                 boton.style.backgroundColor = '#112f58'
+                boton.disabled = true
             } else {
                 ataqueJugador.push('TIERRA')
                 console.log('ataqueJugador')
                 boton.style.backgroundColor = '#112f58'
+                boton.disabled = true
             }
             console.log(ataqueJugador)
             ataqueAleatorioEnemigo() // va aqui para que cuando el jugador ataque, la maquina ataque de una vez
@@ -213,31 +244,58 @@ function iniciarPelea() {
     if (ataqueJugador.length === 5) {
         combate();
     }
-
 }
 
-function iAmbosOponentes(jugador, enemigo) { //sirve para imprimir el ataque que se eligio
-iAtaqueJugador = ataqueJugador[jugador] //estas variables van a guardar el ataque del jugador
-iAtaqueEnemigo = ataqueEnemigo[enemigo]
+function indexAmbosOponentes(jugador, enemigo) { //sirve para imprimir el ataque que se eligio
+    indexAtaqueJugador = ataqueJugador[jugador] //estas variables van a guardar el ataque del jugador
+    indexAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
 
 function combate() {
 
     //un for para que recorarra el arreglo del jugador y de la maquina 
-    for (let i = 0; i < ataqueJugador.length; i++) {
-        iAmbosOponentes(i, i) //impime el ataque de cada jugador
-        crearMensaje("empate")
+    for (let index = 0; index < ataqueJugador.length; index++) {
+        if (ataqueJugador[index] === ataqueEnemigo[index]) {
+            indexAmbosOponentes(index, index) //impime el ataque de cada jugador
+            crearMensaje("empate")
+        }
+        else if (ataqueJugador[index] === 'FUEGO' && ataqueEnemigo[index] === 'TIERRA') {
+            indexAmbosOponentes(index, index)
+            crearMensaje("Ganaste")
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
+        }
+        else if (ataqueJugador[index] === 'AGUA' && ataqueEnemigo[index] === 'FUEGO') {
+            indexAmbosOponentes(index, index)
+            crearMensaje("Ganaste")
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
+        }
+        else if (ataqueJugador[index] === 'TIERRA' && ataqueEnemigo[index] === 'AGUA') {
+            indexAmbosOponentes(index, index)
+            crearMensaje("Ganaste")
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
+        }
+        else {
+            indexAmbosOponentes(index, index)
+            crearMensaje("Perdiste")
+            victoriasEnemigo++
+            spanVidasEnemigo.innerHTML = victoriasEnemigo
+        }
 
     }
 
-    
     revisarVidas()
 }
 
 function revisarVidas() {
-    if (vidasEnemigo == 0) {
-        crearMensajeFinal("FELICITACIONES! Ganaste :)")
-    } else if (vidasJugador == 0) {
+    if (victoriasJugador == victoriasEnemigo) {
+        crearMensajeFinal("Empate :/")
+    } else if (victoriasJugador > victoriasEnemigo) {
+        crearMensajeFinal("GANASTE 🎊")
+    }
+    else {
         crearMensajeFinal('Lo siento, perdiste :(')
     }
 }
@@ -248,8 +306,8 @@ function crearMensaje(resultado) {
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
     sectionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = iAtaqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = iAtaqueEnemigo
+    nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo
 
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
@@ -258,10 +316,6 @@ function crearMensaje(resultado) {
 function crearMensajeFinal(resultadoFinal) {
 
     sectionMensajes.innerHTML = resultadoFinal
-
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonTierra.disabled = true
 
     sectionReiniciar.style.display = 'block'
 }
@@ -274,4 +328,63 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+
+
+function pintarPersonaje() {
+    flareon.x = flareon.x + flareon.velocidadX; // si tiene velocidad en x se actualiza en x
+    flareon.y = flareon.y + flareon.velocidadY;
+
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        flareon.mapaFoto,
+        flareon.x,
+        flareon.y,
+        flareon.ancho,
+        flareon.alto
+    )
+
+    //movimiento de los pokemones
+}
+function moverArriba() {
+    flareon.velocidadY = -5
+}
+
+function moverIzquierda() {
+    flareon.velocidadX = -5
+}
+
+function moverAbajo() {
+    flareon.velocidadY = 5
+}
+
+function moverDerecha() {
+    flareon.velocidadX = 5
+}
+
+//funcion para detener el movimiento
+function detenerMovimiento() {
+    flareon.velocidadX = 0
+    flareon.velocidadY = 0
+}
+
+function teclaPresionada(event) {
+    switch (event.key) {  // key es el valor quse se va usar para comparar 
+        case 'ArrowUp':  // es donde va la tecla 
+            moverArriba();
+            break;
+        case 'ArrowLeft':
+            moverIzquierda();
+            break;
+        case 'ArrowDown':
+            moverAbajo();
+            break;
+        case 'ArrowRight':
+            moverDerecha();
+            break;
+        default:
+            break;
+
+    }
+
+}
 window.addEventListener('load', iniciarJuego)
