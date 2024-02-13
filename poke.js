@@ -95,8 +95,8 @@ let haunter = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunte
 
 //arreglo de enemigos 
 let flareonEnemigo = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png', 290, 150) // arreglo 
-let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png', 380, 45)
-let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png',80, 200)
+let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png',80, 200 )
+let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png',380, 45)
 
 //pokemones.push(flareon, lapras, haunter)   push inyecta informacion al arreglo
 
