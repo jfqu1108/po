@@ -68,8 +68,8 @@ class Pokemon { // la clase es el esquema para cada objeto
         this.vida = vida
         this.ataques = []
         //creacion de la imagen dentro del constructor
-        this.x = 20
-        this.y = 30
+        this.x = x
+        this.y = y
         this.ancho = 80
         this.alto = 80
         this.mapaFoto = new Image()
@@ -94,9 +94,9 @@ let lapras = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.pn
 let haunter = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png')
 
 //arreglo de enemigos 
-let flareonEnemigo = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png', 75, 95) // arreglo 
-let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png', 100, 45)
-let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png',30, 15)
+let flareonEnemigo = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png', 290, 150) // arreglo 
+let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png', 380, 45)
+let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png',80, 200)
 
 //pokemones.push(flareon, lapras, haunter)   push inyecta informacion al arreglo
 
@@ -125,6 +125,7 @@ haunter.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🔥', id: 'boton-fuego' },
+    
 
 )
 
