@@ -77,7 +77,7 @@ class Pokemon { // la clase es el esquema para cada objeto
         this.velocidadX = 0
         this.velocidadY = 0
     }
-    pintarPokemon(){
+    pintarPokemon() {
         lienzo.drawImage(
             this.mapaFoto,
             this.x,
@@ -85,7 +85,7 @@ class Pokemon { // la clase es el esquema para cada objeto
             this.ancho,
             this.alto
         )
-        
+
     }
 }
 
@@ -95,8 +95,8 @@ let haunter = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunte
 
 //arreglo de enemigos 
 let flareonEnemigo = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png', 290, 150) // arreglo 
-let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png',80, 200 )
-let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png',380, 45)
+let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png', 80, 200)
+let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png', 380, 45)
 
 //pokemones.push(flareon, lapras, haunter)   push inyecta informacion al arreglo
 
@@ -125,7 +125,7 @@ haunter.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🔥', id: 'boton-fuego' },
-    
+
 
 )
 
@@ -369,12 +369,12 @@ function pintarCanvas() {
         mapa.width,
         mapa.height)
 
-// pintar mascota
-        mascotaJugadorObjeto.pintarPokemon()
-        //pintar la mascota del enemigo
-        flareonEnemigo.pintarPokemon()
-        laprasEnemigo.pintarPokemon()
-        haunterEnemigo.pintarPokemon()       
+    // pintar mascota
+    mascotaJugadorObjeto.pintarPokemon()
+    //pintar la mascota del enemigo
+    flareonEnemigo.pintarPokemon()
+    laprasEnemigo.pintarPokemon()
+    haunterEnemigo.pintarPokemon()
 
 
     //movimiento de los pokemones
@@ -445,4 +445,27 @@ function obtenerObjetoMascota() {
     }
 }
 
+function revisarColicion(enemigo) {
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const izquierdaEnemigo = enemigo.x
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+
+    const arribaMascota = mascotaJugadorObjeto.y
+    const abajoMascota = mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto
+    const izquierdaMascota = mascotaJugadorObjeto.x
+    const derechaMascota = mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho
+
+
+    if (
+        abajoMascota < arribaEnemigo ||
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquierdaEnemigo ||
+        izquierdaMascota > derechaEnemigo
+    ){
+return
+    }
+
+    alert("hay colision");
+}
 window.addEventListener('load', iniciarJuego)
