@@ -376,7 +376,16 @@ function pintarCanvas() {
     laprasEnemigo.pintarPokemon()
     haunterEnemigo.pintarPokemon()
 
+    //solo se van a revisar las colisiones si las mascotas tienen movimiento osea velocidad en x y y
 
+    //genera las colisionesF
+    if (mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) {
+        revisarColision(flareonEnemigo)
+        revisarColision(laprasEnemigo)
+        revisarColision(haunterEnemigo)
+    }
+
+    
     //movimiento de los pokemones
 }
 function moverArriba() {
@@ -445,7 +454,7 @@ function obtenerObjetoMascota() {
     }
 }
 
-function revisarColicion(enemigo) {
+function revisarColision(enemigo) {
     const arribaEnemigo = enemigo.y
     const abajoEnemigo = enemigo.y + enemigo.alto
     const izquierdaEnemigo = enemigo.x
@@ -462,10 +471,12 @@ function revisarColicion(enemigo) {
         arribaMascota > abajoEnemigo ||
         derechaMascota < izquierdaEnemigo ||
         izquierdaMascota > derechaEnemigo
-    ){
-return
+    ) {
+        return
     }
+//detiene el movimiento cuando hay colision
+    detenerMovimiento()
 
-    alert("hay colision");
+    alert("hay colision" + enemigo.nombre);
 }
 window.addEventListener('load', iniciarJuego)
