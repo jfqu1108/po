@@ -64,8 +64,8 @@ const anchoMaximo = 350
 
 //poner un ancho maximo
 
-if (anchoMapa > anchoMaximo) { 
-    anchoMapa = anchoMaximo -20
+if (anchoMapa > anchoMaximo) {
+    anchoMapa = anchoMaximo - 20
 }
 
 alturaBuscada = anchoMapa * 600 / 800
@@ -77,16 +77,17 @@ mapa.height = alturaBuscada
 //objeto instancia se contruye con una clase y un cosntructor y vienven desde la clase
 
 class Pokemon { // la clase es el esquema para cada objeto
-    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10) { //constuctor lo que va a contener el objeto sepuede añadir mas cosas
+    constructor(nombre, foto, vida, fotoMapa,) { //constuctor lo que va a contener el objeto sepuede añadir mas cosas
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
         //creacion de la imagen dentro del constructor
-        this.x = aleatorio(0, mapa.width, -this.ancho)// aparicion alea toria en el mapa para que el pokemon no se salga de la imagen
-        this.y = aleatorio(0, mapa.height, -this.alto)
         this.ancho = 40 // tamaño de las cabezas de los pokemones
         this.alto = 40
+        this.x = aleatorio(0, mapa.width - this.ancho)// aparicion alea toria en el mapa posicion en x usando ancho del mapa - ancho del pokemon para q no se salga
+        this.y = aleatorio(0, mapa.height - this.alto)
+
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -109,9 +110,9 @@ let lapras = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.pn
 let haunter = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png')
 
 //arreglo de enemigos 
-let flareonEnemigo = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png', 290, 150) // arreglo 
-let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png', 80, 200)
-let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png', 380, 45)
+let flareonEnemigo = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png') // arreglo 
+let laprasEnemigo = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png')
+let haunterEnemigo = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png')
 
 //pokemones.push(flareon, lapras, haunter)   push inyecta informacion al arreglo
 
