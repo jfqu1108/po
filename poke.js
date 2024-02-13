@@ -477,6 +477,10 @@ function revisarColision(enemigo) {
 //detiene el movimiento cuando hay colision
     detenerMovimiento()
 
-    alert("hay colision" + enemigo.nombre);
+    //desaparecer el mapa cuando haya colision para iniciar ataque
+    sectionSeleccionarAtaque.style.display = 'flex';
+    sectionVermapa.style.display = 'none';
+
+    //alert("hay colision" + enemigo.nombre);
 }
 window.addEventListener('load', iniciarJuego)
