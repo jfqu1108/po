@@ -119,6 +119,17 @@ color: #BED754;
   justify-content: center;
 }
 
+#ver-mapa button {
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 10px,0;
+}
+
 @media (max-width:360px){
   .tarjetas {
     flex-direction: column; 
@@ -126,5 +137,15 @@ color: #BED754;
 .tarjetas-ataques{
   flex-direction: column; 
 }
+
+}
+
+@media (max-width:300px){
+  #ver-mapa div {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
 }

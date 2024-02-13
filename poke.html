@@ -5,6 +5,7 @@
         <title>Pokemon</title>
         
         <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <section id="seleccionar-mascota">
@@ -20,12 +21,14 @@
         </section>
 
         <section id="ver-mapa">
-            <h2 class="titulo">Recorre el mapa con tu Pokemon</h2>
+            <h2 class="subTitulo">Recorre el mapa con tu Pokemon</h2>
             <canvas id="mapa"></canvas>
             <button onmouseup="detenerMovimiento()"  onmousedown="moverArriba()">Arriba</button>  
+            <div> 
             <button onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()">Izquierda</button> 
             <button onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">Abajo</button> 
             <button onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">Derecha</button> 
+        </div>
 
 
 
