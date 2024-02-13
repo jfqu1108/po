@@ -58,6 +58,21 @@ let intervalo // para actualizar el canvas llamando una funcion constantemente p
 let mapaBackground = new Image()
 mapaBackground.src = './img/mapa.png'
 
+let alturaBuscada
+let anchoMapa = window.innerWidth - 20 // el innerwidth toma el ancho de la pantalla
+const anchoMaximo = 350
+
+//poner un ancho maximo
+
+if (anchoMapa > anchoMaximo) { 
+    anchoMapa = anchoMaximo -20
+}
+
+alturaBuscada = anchoMapa * 600 / 800
+
+mapa.width = anchoMapa
+mapa.height = alturaBuscada
+
 
 //objeto instancia se contruye con una clase y un cosntructor y vienven desde la clase
 
@@ -68,10 +83,10 @@ class Pokemon { // la clase es el esquema para cada objeto
         this.vida = vida
         this.ataques = []
         //creacion de la imagen dentro del constructor
-        this.x = x
-        this.y = y
-        this.ancho = 80
-        this.alto = 80
+        this.x = aleatorio(0, mapa.width, -this.ancho)// aparicion alea toria en el mapa para que el pokemon no se salga de la imagen
+        this.y = aleatorio(0, mapa.height, -this.alto)
+        this.ancho = 40 // tamaño de las cabezas de los pokemones
+        this.alto = 40
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -211,7 +226,7 @@ function seleccionarMascotaJugador() {
 
     iniciarMapa()
 
-    
+
 }
 
 function extraerAtaques(mascotaJugador) { // el parametro se usa como variable interna
@@ -407,7 +422,7 @@ function pintarCanvas() {
         revisarColision(haunterEnemigo)
     }
 
-    
+
     //movimiento de los pokemones
 }
 function moverArriba() {
@@ -458,11 +473,6 @@ function iniciarMapa() {
     mascotaJugadorObjeto = obtenerObjetoMascota();
     // incrementar tamaño del mapa
 
-    mapa.width = 500
-    mapa.height = 300
-
-
-
     window.addEventListener('keydown', teclaPresionada)
     window.addEventListener('keyup', detenerMovimiento)
 }
@@ -496,7 +506,7 @@ function revisarColision(enemigo) {
     ) {
         return
     }
-//detiene el movimiento cuando hay colision
+    //detiene el movimiento cuando hay colision
     detenerMovimiento()
 
     clearInterval(intervalo) //limpiar el intervalo
