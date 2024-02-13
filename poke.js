@@ -111,6 +111,14 @@ flareon.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
+flareonEnemigo.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
 lapras.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '💧', id: 'boton-agua' },
@@ -119,15 +127,29 @@ lapras.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
+/*laprasEnemigo.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)*/
+
 haunter.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🔥', id: 'boton-fuego' },
-
-
 )
+
+/*haunterEnemigo.ataques.push(
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+)*/
 
 pokemones.push(flareon, lapras, haunter);
 
@@ -189,7 +211,7 @@ function seleccionarMascotaJugador() {
 
     iniciarMapa()
 
-    seleccionarMascotaEnemigo()
+    
 }
 
 function extraerAtaques(mascotaJugador) { // el parametro se usa como variable interna
@@ -477,9 +499,12 @@ function revisarColision(enemigo) {
 //detiene el movimiento cuando hay colision
     detenerMovimiento()
 
+    clearInterval(intervalo) //limpiar el intervalo
+
     //desaparecer el mapa cuando haya colision para iniciar ataque
     sectionSeleccionarAtaque.style.display = 'flex';
     sectionVermapa.style.display = 'none';
+    seleccionarMascotaEnemigo(enemigo);
 
     //alert("hay colision" + enemigo.nombre);
 }
