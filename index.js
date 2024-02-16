@@ -20,6 +20,8 @@ app.get("/unirse", (req, res) => {  // el unirse es el primer endpoint donde se 
 
     jugadores.push(jugador) // agrega a la lista de jugadores
 
+    res.setHeader("Access-Control-Allow-Origin", "*") // soluciona el problema de acceso al origen
+
     res.send(id) //responda un id al jugador nuevo
 })
 

@@ -127,14 +127,6 @@ flareon.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
-flareonEnemigo.ataques.push(
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🌱', id: 'boton-tierra' },
-)
-
 lapras.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '💧', id: 'boton-agua' },
@@ -179,6 +171,20 @@ function iniciarJuego() {
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
     botonReiniciar.addEventListener('click', reiniciarJuego)
+
+    unirseAlJuego()
+
+}
+function unirseAlJuego() {
+    fetch("http://localhost:8081/unirse") // genera la union backend juego
+        .then(function (res) {
+            //codigo para que me emuestre en texto lo del fetch
+            if (res.ok)
+                res.text()
+                    .then(function (respuesta){
+                        console.log(respuesta)
+                    })
+        })
 }
 
 function seleccionarMascotaJugador() {
