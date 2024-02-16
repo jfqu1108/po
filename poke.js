@@ -77,8 +77,8 @@ mapa.height = alturaBuscada
 //objeto instancia se contruye con una clase y un cosntructor y vienven desde la clase
 
 class Pokemon { // la clase es el esquema para cada objeto
-    constructor(nombre, foto, vida, fotoMapa,) { //constuctor lo que va a contener el objeto sepuede añadir mas cosas
-        this.nombre = nombre
+    constructor(nombre, foto, vida, fotoMapa) { //constuctor lo que va a contener el objeto sepuede añadir mas cosas
+        this.nombre = nombre//el this llama la variable y el igual es para que e llene con la indformacion q queiero
         this.foto = foto
         this.vida = vida
         this.ataques = []
@@ -105,7 +105,7 @@ class Pokemon { // la clase es el esquema para cada objeto
     }
 }
 
-let flareon = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png') // arreglo 
+let flareon = new Pokemon('Flareon', './img/flareon.png', 3, './img/cabezaFlareon.png') // arreglo  dto
 let lapras = new Pokemon('Lapras', './img/lapras.png', 3, './img/cabezaLapras.png')
 let haunter = new Pokemon('Haunter', './img/haunter.png', 3, './img/cabezaHaunter.png')
 
@@ -143,13 +143,6 @@ lapras.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
-/*laprasEnemigo.ataques.push(
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🌱', id: 'boton-tierra' },
-)*/
 
 haunter.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
@@ -159,13 +152,6 @@ haunter.ataques.push(
     { nombre: '🔥', id: 'boton-fuego' },
 )
 
-/*haunterEnemigo.ataques.push(
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🔥', id: 'boton-fuego' },
-)*/
 
 pokemones.push(flareon, lapras, haunter);
 

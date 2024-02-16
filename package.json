@@ -1,0 +1,22 @@
+{
+  "name": "batalla_poke",
+  "version": "1.0.0",
+  "description": "prueba",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfqu1108/po.git"
+  },
+  "author": "felipe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jfqu1108/po/issues"
+  },
+  "homepage": "https://github.com/jfqu1108/po#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
