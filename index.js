@@ -1,6 +1,15 @@
+//importando librerias
+
 const express = require('express') //con express se puede inicar la creacion del back
+const cors = require('cors')
 
 const app = express()
+
+app.use(cors()) //desabilita los errores de origen 
+
+app.use(express.json()) // habilitar peticiones post para que el JSON soporte las soporte
+
+
 const jugadores = [] //constante vacia para que se registren los jugadores
 
 class Jugador {
@@ -24,6 +33,16 @@ app.get("/unirse", (req, res) => {  // el unirse es el primer endpoint donde se 
 
     res.send(id) //responda un id al jugador nuevo
 })
+
+//porgramando el servicio 
+
+app.post("/pokemon/:jugadorid",(req, res) => {
+    const jugadorid = req.params.jugadorid || ""// extraer los dato del jugador en el console .log
+    console.log(jugadores)
+    console.log(jugadorid) //aceder jugadorid
+    res.end()
+})
+    
 
 app.listen(8081, () => {
     console.log("servido funcionando")
