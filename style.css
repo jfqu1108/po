@@ -30,7 +30,7 @@ body {
   gap: 10px;
 }
 
-.tarjeta-de-mokepon {
+.tarjeta-de-pokemon {
   width: 180px;
   height: 100px;
   background: #11468F;
@@ -43,7 +43,7 @@ body {
   color: white;
 }
 
-.tarjeta-de-mokepon img {
+.tarjeta-de-pokemon img {
   width: 80px;
 }
 

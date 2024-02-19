@@ -29,7 +29,7 @@ const contenedorTarjetas = document.getElementById('contenedorTarjetas') // es e
 const sectionVermapa = document.getElementById('ver-mapa') //canvas
 const mapa = document.getElementById('mapa') // canvas
 
-
+let jugadorId = []
 let pokemones = []  //arreglo
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -155,7 +155,7 @@ function iniciarJuego() {
     pokemones.forEach((pokemon) => {
         opcionDePokemones = `
         <input type="radio" name="mascota" id=${pokemon.nombre} />
-        <label class="tarjeta-de-mokepon" for=${pokemon.nombre}>
+        <label class="tarjeta-de-pokemon" for=${pokemon.nombre}>
             <p>${pokemon.nombre}</p>
             <img src=${pokemon.foto} alt=${pokemon.nombre}>
         </label>
@@ -176,7 +176,7 @@ function iniciarJuego() {
         
     }
     function unirseAlJuego() {
-        fetch("http://localhost:8080/unirse")
+        fetch("http://localhost:8081/unirse")
             .then(function (res) {
                 if (res.ok) {
                     res.text()
@@ -524,6 +524,5 @@ function revisarColision(enemigo) {
     sectionVermapa.style.display = 'none';
     seleccionarMascotaEnemigo(enemigo);
 
-    //alert("hay colision" + enemigo.nombre);
 }
 window.addEventListener('load', iniciarJuego)
