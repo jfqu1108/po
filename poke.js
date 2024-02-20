@@ -211,9 +211,6 @@ function seleccionarMascotaJugador() {
     } else {
         alert('Selecciona una mascota')
     }
-
-
-
     extraerAtaques(mascotaJugador) //funcion con parametro
 
     //iniciar recorrido del mapa
@@ -221,8 +218,6 @@ function seleccionarMascotaJugador() {
     intervalo = setInterval(pintarCanvas, 50)
 
     iniciarMapa()
-
-
 }
 
 function seleccionarPokemon(mascotaJugador) {
@@ -416,6 +411,10 @@ function pintarCanvas() {
 
     // pintar mascota
     mascotaJugadorObjeto.pintarPokemon()
+
+    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
+
+
     //pintar la mascota del enemigo
     flareonEnemigo.pintarPokemon()
     laprasEnemigo.pintarPokemon()
@@ -429,10 +428,23 @@ function pintarCanvas() {
         revisarColision(laprasEnemigo)
         revisarColision(haunterEnemigo)
     }
-
-
-    //movimiento de los pokemones
 }
+
+    //envio de informacion al back
+    function enviarPosicion(x,y) {
+        fetch(`http://localhost:8081/pokemon/${jugadorId}/posicion`,{
+        method : "post",
+        headers : {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            x: x,
+            y: y
+        })
+    })
+}
+    //movimiento de los pokemones
+
 function moverArriba() {
     mascotaJugadorObjeto.velocidadY = -5
 }
